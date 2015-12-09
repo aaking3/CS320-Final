@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EB29CB881C174BFD00CA2C6B /* ISIS.png in Resources */ = {isa = PBXBuildFile; fileRef = EB29CB871C174BFD00CA2C6B /* ISIS.png */; };
+		EB8CA2C61C17A0FF00E7E014 /* Demon.png in Resources */ = {isa = PBXBuildFile; fileRef = EB8CA2C51C17A0FF00E7E014 /* Demon.png */; };
 		EBB22FDE1C0E397900508F34 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB22FDD1C0E397900508F34 /* AppDelegate.swift */; };
 		EBB22FE01C0E397900508F34 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = EBB22FDF1C0E397900508F34 /* GameScene.sks */; };
 		EBB22FE21C0E397900508F34 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB22FE11C0E397900508F34 /* GameScene.swift */; };
@@ -16,7 +18,7 @@
 		EBB22FEC1C0E397A00508F34 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EBB22FEA1C0E397A00508F34 /* LaunchScreen.storyboard */; };
 		EBB22FF71C0E397A00508F34 /* CS320_FinalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB22FF61C0E397A00508F34 /* CS320_FinalTests.swift */; };
 		EBB230021C0E397A00508F34 /* CS320_FinalUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB230011C0E397A00508F34 /* CS320_FinalUITests.swift */; };
-		EBB230111C0E40A000508F34 /* ISIS.png in Resources */ = {isa = PBXBuildFile; fileRef = EBB230101C0E40A000508F34 /* ISIS.png */; };
+		EBBC3FBA1C187E3000566496 /* Bullet.png in Resources */ = {isa = PBXBuildFile; fileRef = EBBC3FB91C187E3000566496 /* Bullet.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +39,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		EB29CB871C174BFD00CA2C6B /* ISIS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ISIS.png; path = ../../../../Pictures/ISIS.png; sourceTree = "<group>"; };
+		EB8CA2C51C17A0FF00E7E014 /* Demon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Demon.png; sourceTree = "<group>"; };
 		EBB22FDA1C0E397800508F34 /* CS320-Final.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CS320-Final.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBB22FDD1C0E397900508F34 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EBB22FDF1C0E397900508F34 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -52,7 +56,7 @@
 		EBB22FFD1C0E397A00508F34 /* CS320-FinalUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "CS320-FinalUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBB230011C0E397A00508F34 /* CS320_FinalUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CS320_FinalUITests.swift; sourceTree = "<group>"; };
 		EBB230031C0E397A00508F34 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		EBB230101C0E40A000508F34 /* ISIS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ISIS.png; path = ../../../../Documents/ISIS.png; sourceTree = "<group>"; };
+		EBBC3FB91C187E3000566496 /* Bullet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Bullet.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,7 +141,9 @@
 		EBB2300F1C0E408B00508F34 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				EBB230101C0E40A000508F34 /* ISIS.png */,
+				EB29CB871C174BFD00CA2C6B /* ISIS.png */,
+				EBBC3FB91C187E3000566496 /* Bullet.png */,
+				EB8CA2C51C17A0FF00E7E014 /* Demon.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -251,9 +257,11 @@
 			files = (
 				EBB22FE01C0E397900508F34 /* GameScene.sks in Resources */,
 				EBB22FEC1C0E397A00508F34 /* LaunchScreen.storyboard in Resources */,
-				EBB230111C0E40A000508F34 /* ISIS.png in Resources */,
 				EBB22FE91C0E397A00508F34 /* Assets.xcassets in Resources */,
+				EBBC3FBA1C187E3000566496 /* Bullet.png in Resources */,
+				EB29CB881C174BFD00CA2C6B /* ISIS.png in Resources */,
 				EBB22FE71C0E397900508F34 /* Main.storyboard in Resources */,
+				EB8CA2C61C17A0FF00E7E014 /* Demon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -507,6 +515,7 @@
 				EBB230081C0E397A00508F34 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		EBB230091C0E397A00508F34 /* Build configuration list for PBXNativeTarget "CS320-FinalTests" */ = {
 			isa = XCConfigurationList;
@@ -515,6 +524,7 @@
 				EBB2300B1C0E397A00508F34 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		EBB2300C1C0E397A00508F34 /* Build configuration list for PBXNativeTarget "CS320-FinalUITests" */ = {
 			isa = XCConfigurationList;
@@ -523,6 +533,7 @@
 				EBB2300E1C0E397A00508F34 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

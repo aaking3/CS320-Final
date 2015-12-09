@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "CD458B3B49BF9C3C0AC08EA121B99459D602D151",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "D965C1D5688A5C06765194675241877A022032C5" : 0,
+    "CD458B3B49BF9C3C0AC08EA121B99459D602D151" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "C9FE6F76-2E17-430B-8CFE-306622C18AFC",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "D965C1D5688A5C06765194675241877A022032C5" : "",
+    "CD458B3B49BF9C3C0AC08EA121B99459D602D151" : "CS320-Final\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "CS320-Final",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "CS320-Final.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/aaking3\/CS320-Final.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "CD458B3B49BF9C3C0AC08EA121B99459D602D151"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/aaking3\/reveladorking.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "D965C1D5688A5C06765194675241877A022032C5"
+    }
+  ]
+}

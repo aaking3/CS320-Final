@@ -1,7 +1,7 @@
 version: "Apple Swift version 2.1 (swiftlang-700.1.101.6 clang-700.1.76)"
 options: "d58ee16580713dde257d0d614a464bad"
-build_time: [502749099, 1811000]
+build_time: [502990422, 99001000]
 inputs:
-  "/Users/aaronking/Desktop/reveladorking/CS320-Final/CS320-Final/GameScene.swift": !private [502350447, 0]
-  "/Users/aaronking/Desktop/reveladorking/CS320-Final/CS320-Final/AppDelegate.swift": [502316665, 0]
   "/Users/aaronking/Desktop/reveladorking/CS320-Final/CS320-Final/GameViewController.swift": [502317281, 0]
+  "/Users/aaronking/Desktop/reveladorking/CS320-Final/CS320-Final/GameScene.swift": [502990414, 0]
+  "/Users/aaronking/Desktop/reveladorking/CS320-Final/CS320-Final/AppDelegate.swift": [502316665, 0]

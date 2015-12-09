@@ -6,22 +6,22 @@ provides-nominal:
 provides-member:
 - ["C11CS320_Final18GameViewController", ""]
 provides-dynamic-lookup:
+- "supportedInterfaceOrientations"
 - "prefersStatusBarHidden"
 - "viewDidLoad"
-- "supportedInterfaceOrientations"
 - "didReceiveMemoryWarning"
 - "shouldAutorotate"
 depends-top-level:
-- "UIInterfaceOrientationMask"
-- !private "GameScene"
-- !private "BooleanLiteralType"
-- !private "UIDevice"
 - !private "SKView"
-- "GameViewController"
-- "UIViewController"
-- "Bool"
-- !private "StringLiteralType"
 - !private "=="
+- !private "StringLiteralType"
+- "UIInterfaceOrientationMask"
+- "UIViewController"
+- "GameViewController"
+- !private "GameScene"
+- !private "UIDevice"
+- !private "BooleanLiteralType"
+- "Bool"
 depends-member:
 - !private ["PSs9AnyObject", "GameScene"]
 - !private ["PSs9AnyObject", "UIDevice"]

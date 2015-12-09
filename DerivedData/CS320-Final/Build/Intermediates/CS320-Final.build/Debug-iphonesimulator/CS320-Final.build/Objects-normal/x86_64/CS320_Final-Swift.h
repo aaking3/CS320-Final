@@ -88,8 +88,8 @@ typedef int swift_int4  __attribute__((__ext_vector_type__(4)));
 #if defined(__has_feature) && __has_feature(modules)
 @import UIKit;
 @import SpriteKit;
-@import CoreFoundation;
 @import CoreGraphics;
+@import CoreFoundation;
 #endif
 
 #pragma clang diagnostic ignored "-Wproperty-attribute-mismatch"
@@ -110,6 +110,8 @@ SWIFT_CLASS("_TtC11CS320_Final11AppDelegate")
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
+@class SKSpriteNode;
+@class SKAction;
 @class SKView;
 @class UITouch;
 @class UIEvent;
@@ -117,7 +119,18 @@ SWIFT_CLASS("_TtC11CS320_Final11AppDelegate")
 
 SWIFT_CLASS("_TtC11CS320_Final9GameScene")
 @interface GameScene : SKScene <SKPhysicsContactDelegate>
+@property (nonatomic, strong) SKSpriteNode * __nonnull ship;
+@property (nonatomic, strong) SKSpriteNode * __nonnull bullet;
+@property (nonatomic, strong) SKAction * __nonnull moveUp;
+@property (nonatomic, strong) SKAction * __nonnull moveDown;
+@property (nonatomic, readonly) CGFloat velocity;
+@property (nonatomic) CFTimeInterval lastPlane;
+@property (nonatomic, readonly) NSInteger shipMask;
+@property (nonatomic, readonly) NSInteger planesMask;
 - (void)didMoveToView:(SKView * __nonnull)view;
+- (void)addShip;
+- (void)spawnBullet;
+- (void)spawnEnemy;
 - (void)touchesBegan:(NSSet<UITouch *> * __nonnull)touches withEvent:(UIEvent * __nullable)event;
 - (void)update:(CFTimeInterval)currentTime;
 - (nonnull instancetype)initWithSize:(CGSize)size OBJC_DESIGNATED_INITIALIZER;
