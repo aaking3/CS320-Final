@@ -135,7 +135,12 @@ SWIFT_CLASS("_TtC11CS320_Final9GameScene")
 - (void)spawnBullet;
 - (void)spawnEnemy;
 - (void)updateSinceLastUpdate:(CFTimeInterval)timeSinceLastUpdate;
-- (void)touchesBegan:(NSSet<UITouch *> * __nonnull)touches withEvent:(UIEvent * __nullable)event;
+- (void)touchesEnded:(NSSet<UITouch *> * __nonnull)touches withEvent:(UIEvent * __nullable)event;
+- (CGPoint)addVector:(CGPoint)x y:(CGPoint)y;
+- (CGPoint)subtractVector:(CGPoint)x y:(CGPoint)y;
+- (CGPoint)multiplyVector:(CGPoint)x y:(CGPoint)y;
+- (CGFloat)lengthOfVector:(CGPoint)x;
+- (CGPoint)vectorNormalize:(CGPoint)x;
 - (void)update:(CFTimeInterval)currentTime;
 - (nonnull instancetype)initWithSize:(CGSize)size OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
