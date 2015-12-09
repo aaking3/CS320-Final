@@ -26,8 +26,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         /* Setup your scene here */
 
         self.addShip()
-        var enemyTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: ("spawnEnemy"), userInfo: nil, repeats: true)
-        var bulletTimer = NSTimer.scheduledTimerWithTimeInterval(0.2, target: self, selector: ("spawnBullet"), userInfo: nil, repeats: true)
         self.spawnEnemy()
     }
     
@@ -58,31 +56,74 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func spawnEnemy(){
         var enemy = SKSpriteNode(imageNamed: "ISIS.png")
-        var min = self.size.width/8
-        var max = self.size.width-20
-        var spawnPosition = UInt32(max - min)
-        var xPosition = CGFloat(arc4random_uniform(spawnPosition))
+        let minX = enemy.size.width/2
+        let maxX = self.frame.size.width - enemy.size.width/2
+        let rangeX = maxX-minX
+        let spawnPosition:CGFloat = (CGFloat)(arc4random())%CGFloat(rangeX) + CGFloat(minX)
+        enemy.position = CGPointMake(spawnPosition, self.frame.size.height+enemy.size.height)
+        
+        // Collision of enemy and bullet
+        enemy.physicsBody = SKPhysicsBody(rectangleOfSize: enemy.size)
         enemy.physicsBody?.dynamic = true
         enemy.physicsBody?.categoryBitMask = enemyMask
         enemy.physicsBody?.contactTestBitMask = bulletMask
         enemy.physicsBody?.collisionBitMask = 0
-        enemy.position = CGPoint(x: xPosition, y: self.size.height)
-        let action = SKAction.moveToY(-40, duration: 3.0)
-        enemy.runAction(SKAction.repeatActionForever(action))
-        self.addChild(enemy)
-    }
-
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-       /* Called when a touch begins */
         
-        for touch: AnyObject in touches{
-            let location = touch.locationInNode(self)
-            
+        self.addChild(enemy)
+        
+        let minDuration = 2
+        let maxDuration = 4
+        let rangeDuration = maxDuration - minDuration
+        let duration = Int(arc4random())%Int(rangeDuration) + Int(minDuration)
+        //Creation Action
+        var actionArray = [SKAction]()
+        actionArray.append(SKAction.moveTo(CGPointMake(spawnPosition, -enemy.size.height), duration: NSTimeInterval(duration)))
+        actionArray.append(SKAction.removeFromParent())
+        enemy.runAction(SKAction.sequence(actionArray))
+
+    }
+    
+    func updateSinceLastUpdate(timeSinceLastUpdate: CFTimeInterval){
+        lastYieldTimeInterval += timeSinceLastUpdate
+        if(lastYieldTimeInterval > 1){
+            lastYieldTimeInterval = 0
+            spawnEnemy()
         }
+        
+    }
+    
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    }
+    
+    func addVector(x: CGPoint, y: CGPoint)->CGPoint{
+        return CGPointMake(x.x + y.x, x.y + y.y)
+    }
+    
+    func subtractVector(x: CGPoint, y: CGPoint)->CGPoint{
+        return CGPointMake(x.x - y.x, x.y - y.y)
+    }
+    
+    func multiplyVector(x: CGPoint, y: CGPoint)->CGPoint{
+        return CGPointMake(x.x * y.x, x.y * y.y)
+    }
+    
+    func lengthOfVector(x: CGPoint)->CGFloat{
+        return CGFloat(sqrtf(CFloat(x.x)*CFloat(x.x)+CFloat(x.y)*CFloat(x.y)))
+    }
+    
+    func vectorNormalize(x:CGPoint)->CGPoint{
+        var length: CGFloat = lengthOfVector(x)
+        return CGPointMake(x.x / length, x.y/length)
     }
     
     override func update(currentTime: CFTimeInterval) {
         /* Called before each frame is rendered */
-
+        var timeSinceLastUpdate = currentTime - lastUpdateTimeInterval
+        lastUpdateTimeInterval = currentTime
+        if(timeSinceLastUpdate > 1){
+            timeSinceLastUpdate = 1/60
+            lastUpdateTimeInterval = currentTime
+        }
+        updateSinceLastUpdate(timeSinceLastUpdate)
     }
 }
