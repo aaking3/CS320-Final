@@ -17,16 +17,37 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var lastPlane: CFTimeInterval = 0
     var lastYieldTimeInterval = NSTimeInterval()
     var lastUpdateTimeInterval = NSTimeInterval()
-    var enemiesDestroyer: Int = 0
+    var enemiesDestroyed: Int = 0
+    var count = 30
     
     let enemyMask: UInt32 = 0x1 << 1
     let bulletMask:UInt32 = 0x1 << 0
     
     override func didMoveToView(view: SKView) {
-        /* Setup your scene here */
-
+        
+//        let bgImage = SKSpriteNode(imageNamed: "Background.png")
+//        bgImage.position = CGPointMake(self.size.width/2, self.size.height/2)
+//        bgImage.size = (scene?.size)!
+//        self.addChild(bgImage)
+        self.backgroundColor = UIColor.blackColor()
         self.addShip()
         self.spawnEnemy()
+        
+        _ = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("update"), userInfo: nil, repeats: true)
+    }
+    func update() {
+        
+        if(count >= 0)
+        {
+            count--
+        } else {
+            gameScore = enemiesDestroyed
+            let transition:SKTransition = SKTransition.flipHorizontalWithDuration(0.5)
+            let endOfGameScene:SKScene = EndOfGameScene(size: self.size, timeUp: true)
+            self.view?.presentScene(endOfGameScene, transition: transition)
+            
+        }
+        
     }
     
     func addShip(){
@@ -48,14 +69,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func spawnBullet(){
         bullet = SKSpriteNode(imageNamed: "Bullet.png")
         bullet.zPosition = -5
-        bullet.position = CGPointMake(ship.position.x, ship.position.y)
+//        bullet.position = CGPointMake(ship.position.x, ship.position.y)
         let action = SKAction.moveToY(self.size.height + 40, duration: 0.6)
         bullet.runAction(SKAction.repeatActionForever(action))
         self.addChild(bullet)
     }
     
     func spawnEnemy(){
-        var enemy = SKSpriteNode(imageNamed: "ISIS.png")
+        let enemy = SKSpriteNode(imageNamed: "ISIS.png")
         let minX = enemy.size.width/2
         let maxX = self.frame.size.width - enemy.size.width/2
         let rangeX = maxX-minX
@@ -78,6 +99,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         //Creation Action
         var actionArray = [SKAction]()
         actionArray.append(SKAction.moveTo(CGPointMake(spawnPosition, -enemy.size.height), duration: NSTimeInterval(duration)))
+        
         actionArray.append(SKAction.removeFromParent())
         enemy.runAction(SKAction.sequence(actionArray))
 
@@ -93,6 +115,63 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        
+        if let touch = touches.first as UITouch? {
+        
+        let location:CGPoint = touch.locationInNode(self)
+        
+        let bullet:SKSpriteNode = SKSpriteNode(imageNamed: "Bullet")
+//        bullet.position = ship.position
+        bullet.position = CGPointMake(self.size.width/2, 120)
+        bullet.physicsBody = SKPhysicsBody(circleOfRadius: bullet.size.width/2)
+        bullet.physicsBody?.dynamic = true
+        bullet.physicsBody?.categoryBitMask = bulletMask
+        bullet.physicsBody?.contactTestBitMask = enemyMask
+        bullet.physicsBody?.collisionBitMask = 0
+        bullet.physicsBody?.usesPreciseCollisionDetection = true
+        
+        let offset:CGPoint = subtractVector(location, y: bullet.position)
+        if offset.y < 0 {
+            return
+        }
+        self.addChild(bullet)
+        
+        let direction:CGPoint = vectorNormalize(offset)
+        
+        let shotLength:CGPoint = vectorMultiply(direction, b: 5000)
+        let finalDestination:CGPoint = addVector(shotLength, y: bullet.position)
+        let velocity = 568/1
+        let moveDuration:Float = Float(self.size.width) / Float(velocity)
+        var actionArray = [SKAction]()
+        actionArray.append(SKAction.moveTo(finalDestination, duration: NSTimeInterval(moveDuration)))
+        actionArray.append(SKAction.removeFromParent())
+        bullet.runAction(SKAction.sequence(actionArray))
+        }
+        
+    }
+    
+    func didBeginContact(contact: SKPhysicsContact) {
+        var firstBody:SKPhysicsBody
+        var secondBody:SKPhysicsBody
+        
+        if (contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask){
+            firstBody = contact.bodyA
+            secondBody = contact.bodyB
+        } else {
+            firstBody = contact.bodyB
+            secondBody = contact.bodyA
+        }
+        
+        if ((firstBody.categoryBitMask & bulletMask) != 0 && (secondBody.categoryBitMask & enemyMask) != 0){
+            explosion(firstBody.node as! SKSpriteNode, enemy: secondBody.node as! SKSpriteNode)
+        }
+    }
+    
+    func explosion(bullet:SKSpriteNode, enemy: SKSpriteNode){
+        bullet.removeFromParent()
+        enemy.removeFromParent()
+        
+        enemiesDestroyed++
     }
     
     func addVector(x: CGPoint, y: CGPoint)->CGPoint{
@@ -106,13 +185,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func multiplyVector(x: CGPoint, y: CGPoint)->CGPoint{
         return CGPointMake(x.x * y.x, x.y * y.y)
     }
+    func vectorMultiply(a:CGPoint, b:CGFloat) ->CGPoint{
+        return CGPointMake(a.x*b, a.y*b)
+    }
     
     func lengthOfVector(x: CGPoint)->CGFloat{
         return CGFloat(sqrtf(CFloat(x.x)*CFloat(x.x)+CFloat(x.y)*CFloat(x.y)))
     }
     
     func vectorNormalize(x:CGPoint)->CGPoint{
-        var length: CGFloat = lengthOfVector(x)
+        let length: CGFloat = lengthOfVector(x)
         return CGPointMake(x.x / length, x.y/length)
     }
     
